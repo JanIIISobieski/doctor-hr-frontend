@@ -1,12 +1,9 @@
 import React from 'react';
-import Hello from './Hello.js';
-import Counter from './Counter.js';
-import FetchData from './FetchData.js';
 import AppBar from 'material-ui/AppBar';
-import TextFieldExample from './TextFieldExample.js';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import ListHeartRates from './ListHeartRates.js'
+import 'react-table/react-table.css'
 
 var styles = {
     "appBarStyle": {
@@ -23,17 +20,11 @@ class App extends React.Component {
             <div>
                 <AppBar position="static" style={styles.appBarStyle}>
                     <Toolbar>
-                        <Typography variant="title" color="inherit">
-                            Sample App
+                        <Typography variant="title" color="default">
+                            Heart Rate Monitor
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Hello name="Gabriel" color="red"/>
-                <Hello name="Monica" />
-                <Counter name="Suyash"/>
-                <Counter name="Mark"/>
-                <FetchData />
-                <TextFieldExample />
                 <ListHeartRates />
             </div>
         );

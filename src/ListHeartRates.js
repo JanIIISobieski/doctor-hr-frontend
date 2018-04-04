@@ -2,28 +2,21 @@ import React from 'react'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import axios from 'axios'
-
-var styles = {
-    "dataStyle": {
-        "marginTop": "20px",
-        "marginBottom": "20px",
-        "color": "blue",
-    }
-}
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class ListHeartRates extends React.Component {
     constructor() {
         super();
         this.state = {
-            'nameTextField': '',
-            'data': '',
+            'nameTextField': 'iamemail@email.com',
+            'data': {heart_rate: [0], heart_rate_times: [0]},
         }
     }
 
     onNameTextFieldChange = (event) => {
         // Update the nameTextField state whenever the text field is changed or perturbed in any way:
         this.setState({'nameTextField': event.target.value});
-    }
+    };
 
     onButtonClick = (event) => {
         //Use get request to fetch the data
@@ -34,16 +27,42 @@ class ListHeartRates extends React.Component {
             console.log(response.status);
             this.setState({"data": response.data})
         })
-    }
+    };
 
+    makeTable = (data) => {
+        var tableArray = [];
+        for (var i = 0; i < data.heart_rate.length; i++){
+            tableArray.push((
+                <TableRow>
+                    <TableCell>
+                        {data.heart_rate[i]}
+                    </TableCell>
+                    <TableCell>
+                        {data.heart_rate_times[i]}
+                    </TableCell>
+                </TableRow>))
+        }
+        return tableArray
+    };
 
     render(){
+        var data = [];
+        if (typeof this.state.data.heart_rate === 'undefined'){
+            data = {heart_rate: ['User not in database'], heart_rate_times: ['User not in database']}
+        }   else{
+            data = this.state.data
+        }
+
+        var table_body = this.makeTable(data);
+
+        console.log(table_body)
+
         return(
             <div>
                 <TextField
-                    floatingLabelText='User e-mail'
-                    defaultValue='iamemail@email.com'
-                    value={this.state.nameTextField}
+                    id='email'
+                    label='User e-mail'
+                    defaultValue={this.state.nameTextField}
                     onChange={this.onNameTextFieldChange}
                 />
 
@@ -55,10 +74,23 @@ class ListHeartRates extends React.Component {
                     onClick={this.onButtonClick}>
                     Search
                 </Button>
-                    <div style={styles.dataStyle}>
-                        {this.state.data.heart_rate}
-                    </div>
+
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Heart Rate</TableCell>
+                            <TableCell>Time</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            table_body
+                        }
+                    </TableBody>
+                </Table>
+
             </div>
+
         );
     }
 }
