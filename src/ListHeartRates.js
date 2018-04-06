@@ -20,8 +20,8 @@ class ListHeartRates extends React.Component {
 
     onButtonClick = (event) => {
         //Use get request to fetch the data
-        var address = 'http://127.0.0.1:5000/api/heart_rate/'
-        address += this.state.nameTextField
+        var address = 'http://127.0.0.1:5000/api/heart_rate/';
+        address += this.state.nameTextField;
         axios.get(address).then( (response) => {
             console.log(response);
             console.log(response.status);
@@ -55,7 +55,7 @@ class ListHeartRates extends React.Component {
 
         var table_body = this.makeTable(data);
 
-        console.log(table_body)
+        console.log(table_body);
 
         return(
             <div>
