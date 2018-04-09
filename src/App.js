@@ -21,7 +21,7 @@ class App extends React.Component {
                 <AppBar position="static" style={styles.appBarStyle}>
                     <Toolbar>
                         <Typography variant="title" color="default">
-                            Heart Rate Monitor (FLASK must be run locally)
+                            Heart Rate Monitor
                         </Typography>
                     </Toolbar>
                 </AppBar>
